@@ -909,3 +909,102 @@ class Person4 {
 	}
 }
 let anonymous = Person4.createAnonymous("male");
+
+//Static private field
+
+class Circle3 {
+    #radius = 0;
+    static #count = 0;
+    constructor(radius) {
+      this.radius = radius;
+      Circle3.#count++;
+    }
+    get area() {
+      return Math.PI * Math.pow(this.radius, 2);
+    }
+    set radius(value) {
+      if (typeof value === 'number' && value > 0) {
+        this.#radius = value;
+      } else {
+        throw 'The radius must be a positive number';
+      }
+    }
+    get radius() {
+      return this.#radius;
+    }
+    static hasRadius(circle) {
+      return #radius in circle;
+    }
+    static getCount() {
+      return Circle3.#count;
+    }
+  }
+  
+  let circles = [new Circle3(10), new Circle3(20), new Circle3(30)];
+  
+  console.log(Circle3.getCount());
+
+//  Private static method example validate
+class Person14 {
+    #firstName;
+    #lastName;
+    constructor(firstName, lastName) {
+      this.#firstName = Person14.#validate(firstName);
+      this.#lastName = Person14.#validate(lastName);
+    }
+    getFullName(format = true) {
+      return format ? this.#firstLast() : this.#lastFirst();
+    }
+    static #validate(name) {
+      if (typeof name === 'string') {
+        let str = name.trim();
+        if (str.length === 3) {
+          return str;
+        }
+      }
+    //  throw 'The name must be a string with at least 3 characters';
+    }
+  
+    #firstLast() {
+      return `${this.#firstName} ${this.#lastName}`;
+    }
+    #lastFirst() {
+      return `${this.#lastName}, ${this.#firstName}`;
+    }
+  }
+  
+  let person14 = new Person14('John', 'Doe');
+console.log(person14.getFullName());
+
+//The instanceof operator and inheritance
+class Person20 {
+    constructor(name) {
+      this.name = name;
+    }
+  }
+  
+  class Employee1 extends Person20 {
+    constructor(name, title) {
+      super(name);
+      this.title = title;
+    }
+  }
+  
+  let e1 = new Employee1();
+  
+  console.log(e1 instanceof Employee1); // true
+  console.log(e1 instanceof Person20); // true
+  console.log(e1 instanceof Object); // true
+  
+//apply, call, and bind
+let cat = { type: 'Cat', sound: 'Meow' };
+let dog = { type: 'Dog', sound: 'Woof' };
+
+const say1 = function (message) {
+  console.log(message);
+  console.log(this.type + ' says ' + this.sound);
+};
+
+say1.apply(cat, ['What does a cat say?']);
+say1.apply(dog, ['What does a dog say?']);
+  
