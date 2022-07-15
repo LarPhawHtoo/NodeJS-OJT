@@ -1,0 +1,383 @@
+* {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Myriad Pro';
+  src: url('../fonts/MyriadPro-Regular.otf');
+}
+
+@font-face {
+  font-family: 'JuliusSansOne';
+  src: url('../fonts/JuliusSansOne-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Arial';
+  src: url('../fonts/arial.ttf');
+}
+
+body {
+  margin: 0 auto;
+  background-color: #ffffff;
+  color: #000000;
+  font-family: 'JuliusSansOne', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  max-width: 1920px;
+}
+
+.clearfix::after {
+  display: table;
+  clear: both;
+  content: '';
+}
+
+ul {
+  list-style: none;
+}
+
+.main {
+  position: relative;
+  padding: 34px 0 100px;
+  background: url(../img/img_main_bg.png) no-repeat center/cover;
+}
+
+a {
+  display: block;
+  color: #ffffff;
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+}
+
+a:hover {
+  transition: 0.8s;
+  opacity: 0.8;
+}
+
+img {
+  max-width: 100%;
+}
+
+.inner {
+  margin: 0 auto;
+  max-width: 1281px;
+}
+
+.main .header {
+  margin-bottom: 90px;
+  padding: 30px 0 27px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  background-color: #ffffff;
+}
+
+.main .header .logo {
+  position: absolute;
+  top: 0;
+  float: left;
+}
+
+.topnav {
+  float: right;
+}
+
+.topnav li {
+  float: left;
+  margin-left: 36px;
+}
+
+.topnav li:last-child {
+  margin-right: 0;
+}
+
+.topnav li a {
+  padding-bottom: 5px;
+  color: #636363;
+  font-family: 'Myriad Pro';
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  border-bottom: 1px solid transparent;
+}
+
+.topnav li a.active,
+li a:hover {
+  border-bottom: 1px solid #cccccc;
+}
+
+.main .main-phara .text-blk {
+  width: 604px;
+  padding: 48px 68px 58px;
+  border: 5px solid #ebebeb;
+}
+
+.main-phara .text-blk .cmn-title {
+  font-size: 33px;
+  text-align: left;
+  letter-spacing: 3px;
+}
+
+.main-phara .text-blk p {
+  line-height: 1.6;
+  padding: 13px 3px;
+  color: #8c8d8d;
+  font-size: 14px;
+  letter-spacing: 0.6px;
+}
+
+.book-table {
+  padding: 55px 0 40px;
+}
+
+.book-table .book-img {
+  float: left;
+  width: 791px;
+  margin-top: 15px;
+  margin-left: 1px;
+}
+
+.book-table .text-blk {
+  float: right;
+  width: 453px;
+}
+
+.cmn-title {
+  line-height: 1.2;
+  font-size: 35px;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.book-table .text-blk .cmn-title {
+  padding-bottom: 40px;
+  text-align: left;
+}
+
+.book-table .text-blk p {
+  line-height: 1.65;
+  padding-bottom: 28px;
+  letter-spacing: 0.55px;
+}
+
+.cmn-btn {
+  width: 312px;
+  padding: 22px 10px 20px;
+  border: 1px solid transparent;
+  background-color: #363636;
+  text-align: center;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  border-radius: 5px;
+}
+
+.cmn-btn:hover {
+  border: 1px solid #363636;
+  background-color: #ffffff;
+  color: #363636;
+}
+
+.book-table .text-blk .cmn-btn {
+  margin: 10px 34px 0;
+}
+
+p {
+  font-family: 'Arial', sans-serif;
+}
+
+.menu {
+  padding: 16px 0 80px;
+}
+
+.menu-img {
+  position: relative;
+  padding: 3px;
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.menu-img::before {
+  display: block;
+  position: absolute;
+  width: 400px;
+  height: 3px;
+  margin-top: 1px;
+  margin-left: 100px;
+  background: #000000;
+  content: '';
+}
+
+.menu-img::after {
+  display: block;
+  position: absolute;
+  right: 1px;
+  width: 400px;
+  height: 3px;
+  margin-top: -19px;
+  margin-right: 120px;
+  background: #000000;
+  content: '';
+}
+
+.menu .menu-list {
+  padding-top: 75px;
+}
+
+.menu .menu-list li {
+  float: left;
+  width: 604px;
+  margin-right: 73px;
+  margin-bottom: 38px;
+}
+
+.menu .menu-list li:nth-child(2n) {
+  margin-right: 0;
+}
+
+.menu .menu-list li .img-blk {
+  float: left;
+  width: 169px;
+}
+
+.menu .menu-list li .text-blk {
+  float: right;
+  width: 407px;
+}
+
+.menu .menu-list li .text-blk .menu-title {
+  padding-bottom: 14px;
+  font-size: 28px;
+  letter-spacing: 2px;
+}
+
+.menu .menu-list li .text-blk p {
+  line-height: 1.85;
+  letter-spacing: 0.44px;
+}
+
+.menu .cmn-btn {
+  margin: 0 auto;
+}
+
+.chefs {
+  padding: 15px 0 40px;
+  background: url(../img/img_background.png) no-repeat center/cover;
+}
+
+.chefs .chef-list {
+  padding-top: 28px;
+}
+
+.chefs .chef-list li {
+  float: left;
+  width: 375px;
+  margin-right: 78px;
+  text-align: center;
+}
+
+.chefs .chef-list li:nth-child(3n) {
+  margin-right: 0;
+}
+
+.chefs .chef-list .chef-name {
+  padding: 27px 0 35px;
+  font-family: 'Myriad Pro';
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: 3.4px;
+  text-transform: uppercase;
+}
+
+.chefs .chef-list .chef-name span {
+  display: block;
+  font-size: 20px;
+  letter-spacing: 2.2px;
+}
+
+.chefs .chef-list p {
+  line-height: 1.55;
+  letter-spacing: 0.8px;
+}
+
+.blog {
+  padding: 10px 0 100px;
+  background: url(../img/img_blogbg.png) no-repeat center/cover;
+}
+
+.blog .blog-list {
+  padding: 32px 0 40px;
+}
+
+.blog .blog-list li {
+  position: relative;
+  float: left;
+  width: 375px;
+  margin-right: 78px;
+}
+
+.blog .blog-list li:nth-child(3n) {
+  margin-right: 0;
+}
+
+.blog .blog-list li p {
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  line-height: 1.35;
+  padding: 3px 10px 0;
+  background-color: rgba(95, 95, 92, 0.5);
+  color: #ffffff;
+  font-family: 'JuliusSansOne', sans-serif;
+  font-size: 24px;
+  text-align: center;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.blog .btn-list {
+  width: 270px;
+  margin: 0 auto;
+}
+
+.blog .btn-list li {
+  float: left;
+  margin-top: 40px;
+  margin-right: 15px;
+}
+
+.blogs .btn-list li:last-child {
+  margin-right: 0;
+}
+
+.blog .btn-list li a {
+  width: 120px;
+  padding: 12px 10px;
+  background-color: #d5d0cc;
+  text-align: center;
+}
+
+.blog .btn-list li a:hover {
+  background-color: #363636;
+}
+
+.footer {
+  line-height: 1.58;
+  color: #ffffff;
+  text-align: center;
+}
+
+.footer .site-info {
+  padding: 30px 0 40px;
+  background-color: #2b2a2a;
+}
+
+.footer .site-info p {
+  padding-top: 39px;
+  letter-spacing: 0.7px;
+}
+
+.footer .copyright {
+  padding: 31px 0 33px;
+  background-color: #252525;
+  letter-spacing: 0.9px;
+}
