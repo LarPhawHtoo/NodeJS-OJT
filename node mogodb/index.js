@@ -39,6 +39,6 @@ app.set("view engine", "html");
 
 app.use("/student", studentController);
 
-app.listen(3000, () => {
-    console.log('Server started at port 3000');
+app.listen(8081, () => {
+    console.log('Server started at port 8081');
 });

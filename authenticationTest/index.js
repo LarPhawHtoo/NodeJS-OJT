@@ -13,7 +13,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use(upload.array());
 app.use(cookieParser());
-app.use(session({secret: "Your secret key"}));
+app.use(session({
+    secret: "Your secret key",
+    resave: true,
+    saveUninitialized: true
+  }));
 
 var Users = [];
 
@@ -85,4 +89,4 @@ console.log(err);
    res.redirect('/login');
 });
 
-app.listen(3000);
+app.listen(4000);
