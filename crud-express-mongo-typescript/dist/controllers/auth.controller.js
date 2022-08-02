@@ -8,13 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
-var connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    yield mongoose_1.default.connect(process.env.MONGO_URI);
-    console.log('MongoDb Connected');
+exports.logout = exports.login = void 0;
+const auth_service_1 = require("../services/auth.service");
+const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    (0, auth_service_1.loginService)(req, res);
 });
-exports = connectDB;
+exports.login = login;
+const logout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    (0, auth_service_1.logoutService)(req, res);
+});
+exports.logout = logout;

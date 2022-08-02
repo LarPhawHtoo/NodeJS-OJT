@@ -1,12 +1,14 @@
 import express, { Express, Request, Response } from "express";
-
 import mongoose from "mongoose";
-
 import dotenv from "dotenv";
+import passport from "passport";
+require('./config/passport');
 
-import "dotenv/config"; 
+//import "dotenv/config"; 
 
-import { movieRoute } from "./routes/movie.route";
+import  movieRoute  from "./routes/movie.route";
+import  userRoute  from "./routes/user.route";
+import  authRoute from "./routes/auth.route";
 
 import {json} from 'body-parser';
 
@@ -15,7 +17,9 @@ dotenv.config();
 
 const app: Express = express();
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 const port = process.env.PORT;
 
@@ -29,9 +33,11 @@ mongoose.connect(`${process.env.MONGO_URL}`, {
       } else {
           console.log('Error in connection ' + err);
       }
-});
+  });
 
-app.use('/', movieRoute());
+app.use('/api/users', passport.authenticate('jwt', { session: false }), userRoute);
+app.use('/api/movies', passport.authenticate('jwt', { session: false }), movieRoute);
+app.use("/api", authRoute);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World');
