@@ -2,7 +2,7 @@ import passport, { use } from "passport";
 
 import passportJWT, { Strategy } from "passport-jwt";
 
-import { User } from "../models/user.model";
+import  User from "../models/user.model";
 
 var JwtStrategy = passportJWT.Strategy;
 var ExtractJwt = passportJWT.ExtractJwt;

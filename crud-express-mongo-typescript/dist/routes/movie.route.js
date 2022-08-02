@@ -3,28 +3,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-//import { Router } from "express";
-//
-//import { createMovie,getAllMovies,getMovie,updateMovie,deleteMovie } from "../controllers/movie.controller";
-//
-//const movieRoute = () => {
-//  const router = Router();
-//
-//  router.post('/movies', createMovie);
-//
-//  router.get('/movies', getAllMovies);
-//
-//  router.get('/movies/:id', getMovie);
-//
-//  router.put('/movies/:id', updateMovie);
-//
-//  router.delete('/movies/:id', deleteMovie);
-//
-//  return router;
-//
-//}
-//
-//export { movieRoute };
 const express_1 = __importDefault(require("express"));
 const movie_controller_1 = require("../controllers/movie.controller");
 const express_validator_1 = require("express-validator");
