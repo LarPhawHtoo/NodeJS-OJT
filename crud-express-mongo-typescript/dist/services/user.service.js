@@ -16,7 +16,6 @@ exports.findByNameService = exports.deleteUserService = exports.updateUserServic
 const express_validator_1 = require("express-validator");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const moment_1 = __importDefault(require("moment"));
-const utils_1 = require("../utils/utils");
 const user_model_1 = __importDefault(require("../models/user.model"));
 const const_1 = require("../const/const");
 const getUserService = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -117,16 +116,16 @@ const updateUserService = (req, res, next) => __awaiter(void 0, void 0, void 0, 
             error.statusCode = 404;
             throw error;
         }
-        let profile = req.body.profile;
-        if (req.file) {
-            profile = req.file.path.replace("\\", "/");
-            if (user.profile && user.profile != profile) {
-                (0, utils_1.deleteFile)(user.profile);
-            }
-            if (profile) {
-                user.profile = profile;
-            }
-        }
+        //let profile: string = req.body.profile;
+        //if (req.file) {
+        //  profile = req.file.path.replace("\\", "/");
+        //  if (user.profile && user.profile != profile) {
+        //    deleteFile(user.profile);
+        //  }
+        //  if (profile) {
+        //    user.profile = profile;
+        //  }
+        //}
         user.name = req.body.name;
         user.email = req.body.email;
         user.type = req.body.type;
