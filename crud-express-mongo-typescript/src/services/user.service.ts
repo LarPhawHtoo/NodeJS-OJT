@@ -27,7 +27,7 @@ export const getUserService = async (
     for (let i = 0; i < users.length; i++) {
       const index = users.findIndex((dist:any) => users[i]._id.equals(dist._id));
       let username = "";
-      index !== -1 ? username = users[index].name : "";
+      index !== -1 ? username = users[index].fullName : "";
       let obj: any = {
         ...users[i]._doc,
         created_username: username
@@ -65,7 +65,7 @@ export const createUserService = async (
       profile = req.file.path.replace("\\", "/");
     }
     const userTdo: UserCreate = {
-      name: req.body.name,
+      fullName: req.body.fullName,
       email: req.body.email,
       password: await bcrypt.hash(req.body.password, 12),
       type: req.body.type,
@@ -132,7 +132,7 @@ export const updateUserService = async (
     //    user.profile = profile;
     //  }
     //}
-    user.name = req.body.name;
+    user.fullName = req.body.fullName;
     user.email = req.body.email;
     user.type = req.body.type;
     user.phone = req.body.phone;
@@ -167,45 +167,45 @@ export const deleteUserService = async (
   }
 };
 
-export const findByNameService = async (
-  req: any,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const page: any = req.query.page || 0;
-    const usersPerPage: any = req.query.upp || 5;
-
-    const userType = req.headers['userType'];
-    const userId = req.headers['userId'];
-    let condition: any = { deleted_at: null };
-    if (userType === "User") {
-      condition.created_user_id = userId;
-    }
-    let fromDate = req.body?.fromDate ? new Date(req.body.fromDate) : null;
-    let toDate = req.body?.toDate ? new Date(req.body.toDate) : null;
-    req.body?.username ? condition.name = { '$regex': req.body.username, '$options': 'i' } : '';
-    req.body?.email ? condition.email = { '$regex': req.body.email, '$options': 'i' } : '';
-    req.body?.fromDate && req.body?.toDate ? condition.createdAt = { $gte: fromDate, $lte: toDate } : '';
-    req.body?.fromDate && !req.body?.toDate ? condition.createdAt = { $gte: fromDate, $lte: new Date() } : '';
-    req.body?.toDate && !req.body?.fromDate ? condition.createdAt = { $lte: toDate } : '';
-    req.body?.fromDate && req.body?.toDate && req.body?.fromDate === req.body?.toDate ?
-    condition.createdAt = { $gte: moment(fromDate), $lte: moment(toDate).add(1, 'days') } : '';
-
-    const users: any = await User.find(condition).skip(page * usersPerPage).limit(usersPerPage);;
-    const result: any = [];
-    for (let i = 0; i < users.length; i++) {
-      const index = users.findIndex((dist:any) => users[i]._id.equals(dist._id));
-      let username = "";
-      index !== -1 ? username = users[index].name : "";
-      let obj: any = {
-        ...users[i]._doc,
-        created_username: username
-      };
-      result.push(obj);
-    }
-    res.json({ data: result, status: 1 });
-  } catch (err) {
-    next(err);
-  }
-}
+//export const findByNameService = async (
+//  req: any,
+//  res: Response,
+//  next: NextFunction
+//) => {
+//  try {
+//    const page: any = req.query.page || 0;
+//    const usersPerPage: any = req.query.upp || 5;
+//
+//    const userType = req.headers['userType'];
+//    const userId = req.headers['userId'];
+//    let condition: any = { deleted_at: null };
+//    if (userType === "User") {
+//      condition.created_user_id = userId;
+//    }
+//    let fromDate = req.body?.fromDate ? new Date(req.body.fromDate) : null;
+//    let toDate = req.body?.toDate ? new Date(req.body.toDate) : null;
+//    req.body?.username ? condition.fullName = { '$regex': req.body.username, '$options': 'i' } : '';
+//    req.body?.email ? condition.email = { '$regex': req.body.email, '$options': 'i' } : '';
+//    req.body?.fromDate && req.body?.toDate ? condition.createdAt = { $gte: fromDate, $lte: toDate } : '';
+//    req.body?.fromDate && !req.body?.toDate ? condition.createdAt = { $gte: fromDate, $lte: new Date() } : '';
+//    req.body?.toDate && !req.body?.fromDate ? condition.createdAt = { $lte: toDate } : '';
+//    req.body?.fromDate && req.body?.toDate && req.body?.fromDate === req.body?.toDate ?
+//    condition.createdAt = { $gte: moment(fromDate), $lte: moment(toDate).add(1, 'days') } : '';
+//
+//    const users: any = await User.find(condition).skip(page * usersPerPage).limit(usersPerPage);;
+//    const result: any = [];
+//    for (let i = 0; i < users.length; i++) {
+//      const index = users.findIndex((dist:any) => users[i]._id.equals(dist._id));
+//      let username = "";
+//      index !== -1 ? username = users[index].fullName : "";
+//      let obj: any = {
+//        ...users[i]._doc,
+//        created_username: username
+//      };
+//      result.push(obj);
+//    }
+//    res.json({ data: result, status: 1 });
+//  } catch (err) {
+//    next(err);
+//  }
+//}

@@ -1,5 +1,5 @@
 export interface UserCreate {
-  name: string;
+  fullName: string;
   email: string;
   password: string;
   type: string;

@@ -10,7 +10,7 @@ router
     .get(getUsers)
     .post(
         [
-            body("name").notEmpty().withMessage("Email must note be empty"),
+            body("fullName").notEmpty().withMessage("Name must note be empty"),
             body("email").notEmpty().withMessage("Email must note be empty")
         ],
         createUser);

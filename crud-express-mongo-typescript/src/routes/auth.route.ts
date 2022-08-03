@@ -1,7 +1,7 @@
 import express from 'express';
 import { createUser } from '../controllers/user.controller';
 import { body } from 'express-validator';
-//import { forgotPassword, resetPassword, checkResetPassword } from '../controllers/auth.controller';
+import { forgotPassword, resetPassword, checkResetPassword } from '../controllers/auth.controller';
 import { logout, login } from '../controllers/auth.controller';
 
 const router = express.Router();
@@ -27,19 +27,19 @@ router
     ],
     createUser);
 
-//router
-//  .route('/forgot-password')
-//  .post(
-//    [
-//      body("email").notEmpty().withMessage("Email must not be empty")
-//    ], forgotPassword);
-//
-//router
-//  .route('/password-reset/:userId/:token')
-//  .get(checkResetPassword);
-//
-//router
-//  .route('/password-reset-update/:userId/:token')
-//  .post(resetPassword);
+router
+  .route('/forgot-password')
+  .post(
+    [
+      body("email").notEmpty().withMessage("Email must not be empty")
+    ], forgotPassword);
+
+router
+  .route('/password-reset/:userId/:token')
+  .get(checkResetPassword);
+
+router
+  .route('/password-reset-update/:userId/:token')
+  .post(resetPassword);
 
 export default router;

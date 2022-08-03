@@ -12,7 +12,7 @@ router
     .route("/")
     .get(user_controller_1.getUsers)
     .post([
-    (0, express_validator_1.body)("name").notEmpty().withMessage("Email must note be empty"),
+    (0, express_validator_1.body)("fullName").notEmpty().withMessage("Name must note be empty"),
     (0, express_validator_1.body)("email").notEmpty().withMessage("Email must note be empty")
 ], user_controller_1.createUser);
 router.route("/logout").post([], auth_controller_1.logout);
