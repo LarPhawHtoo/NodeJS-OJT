@@ -6,6 +6,6 @@ export interface UserCreate {
   phone: string;
   dob: Date;
   address: string;
-  //profile: string;
+  profile: string;
   created_user_id: any;
 }

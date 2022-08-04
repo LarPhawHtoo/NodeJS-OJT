@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteUserService = exports.updateUserService = exports.findUserService = exports.createUserService = exports.getUserService = void 0;
 const express_validator_1 = require("express-validator");
 const bcrypt_1 = __importDefault(require("bcrypt"));
+const utils_1 = require("../utils/utils");
 const user_model_1 = __importDefault(require("../models/user.model"));
 const const_1 = require("../const/const");
 const getUserService = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -71,7 +72,7 @@ const createUserService = (req, res, next) => __awaiter(void 0, void 0, void 0, 
             phone: req.body.phone,
             dob: req.body.dob,
             address: req.body.address,
-            //profile: profile,
+            profile: profile,
             created_user_id: req.body.created_user_id,
         };
         const post = new user_model_1.default(userTdo);
@@ -115,16 +116,16 @@ const updateUserService = (req, res, next) => __awaiter(void 0, void 0, void 0, 
             error.statusCode = 404;
             throw error;
         }
-        //let profile: string = req.body.profile;
-        //if (req.file) {
-        //  profile = req.file.path.replace("\\", "/");
-        //  if (user.profile && user.profile != profile) {
-        //    deleteFile(user.profile);
-        //  }
-        //  if (profile) {
-        //    user.profile = profile;
-        //  }
-        //}
+        let profile = req.body.profile;
+        if (req.file) {
+            profile = req.file.path.replace("\\", "/");
+            if (user.profile && user.profile != profile) {
+                (0, utils_1.deleteFile)(user.profile);
+            }
+            if (profile) {
+                user.profile = profile;
+            }
+        }
         user.fullName = req.body.fullName;
         user.email = req.body.email;
         user.type = req.body.type;

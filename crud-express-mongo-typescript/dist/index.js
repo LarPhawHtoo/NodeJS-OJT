@@ -6,16 +6,40 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const multer_1 = __importDefault(require("multer"));
+const uuid_1 = require("uuid");
 const passport_1 = __importDefault(require("passport"));
 require('./config/passport');
 //import "dotenv/config"; 
 const movie_route_1 = __importDefault(require("./routes/movie.route"));
 const user_route_1 = __importDefault(require("./routes/user.route"));
 const auth_route_1 = __importDefault(require("./routes/auth.route"));
+const path_1 = __importDefault(require("path"));
+const utils_1 = require("./utils/utils");
 dotenv_1.default.config();
+const fileStorage = multer_1.default.diskStorage({
+    destination: (_req, _file, cb) => {
+        cb(null, "apiuploads");
+    },
+    filename: (_req, file, cb) => {
+        cb(null, `${(0, uuid_1.v4)()}_${file.originalname}`);
+    }
+});
+const fileFilter = (_req, file, cb) => {
+    if (file.mimetype === "image/png" ||
+        file.mimetype === "image/jpg" ||
+        file.mimetype === "image/jpeg") {
+        cb(null, true);
+    }
+    else {
+        cb(null, false);
+    }
+};
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
+app.use((0, multer_1.default)({ storage: fileStorage, fileFilter }).single("profile"));
+app.use("/apiuploads", express_1.default.static(path_1.default.join(utils_1.rootDir, "apiuploads")));
 app.use(passport_1.default.initialize());
 app.use(passport_1.default.session());
 const port = process.env.PORT;

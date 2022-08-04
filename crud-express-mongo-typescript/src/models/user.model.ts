@@ -30,10 +30,10 @@ const userSchema = new Schema({
     type: String,
     default: ""
   },
-  //profile: {
-  //  type: String,
-  //  default: ""
-  //},
+  profile: {
+    type: String,
+    default: ""
+  },
   created_user_id: {
     type: Schema.Types.ObjectId,
     ref: "user"

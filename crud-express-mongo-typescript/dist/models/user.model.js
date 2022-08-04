@@ -31,10 +31,10 @@ const userSchema = new mongoose_1.Schema({
         type: String,
         default: ""
     },
-    //profile: {
-    //  type: String,
-    //  default: ""
-    //},
+    profile: {
+        type: String,
+        default: ""
+    },
     created_user_id: {
         type: mongoose_1.Schema.Types.ObjectId,
         ref: "user"

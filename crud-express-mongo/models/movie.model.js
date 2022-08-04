@@ -16,6 +16,9 @@ var movieSchema = mongoose.Schema({
     rating: {
         type: Number,
         required: 'This field is required'
+    },
+    profile: {
+        type:String
     }
 });
 mongoose.model("Movie", movieSchema);

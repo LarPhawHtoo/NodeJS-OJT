@@ -72,7 +72,7 @@ export const createUserService = async (
       phone: req.body.phone,
       dob: req.body.dob,
       address: req.body.address,
-      //profile: profile,
+      profile: profile,
       created_user_id: req.body.created_user_id,
     }
     const post = new User(userTdo);
@@ -122,16 +122,16 @@ export const updateUserService = async (
       error.statusCode = 404;
       throw error;
     }
-    //let profile: string = req.body.profile;
-    //if (req.file) {
-    //  profile = req.file.path.replace("\\", "/");
-    //  if (user.profile && user.profile != profile) {
-    //    deleteFile(user.profile);
-    //  }
-    //  if (profile) {
-    //    user.profile = profile;
-    //  }
-    //}
+    let profile: string = req.body.profile;
+    if (req.file) {
+      profile = req.file.path.replace("\\", "/");
+      if (user.profile && user.profile != profile) {
+        deleteFile(user.profile);
+      }
+      if (profile) {
+        user.profile = profile;
+      }
+    }
     user.fullName = req.body.fullName;
     user.email = req.body.email;
     user.type = req.body.type;

@@ -27,6 +27,7 @@ function insertRecord(req, res) {
     movie.name = req.body.name;
     movie.year = req.body.year;
     movie.rating = req.body.rating;
+    movie.profile = req.body.profile;
 
     movie.save((err, doc) => {
         if (!err) {
