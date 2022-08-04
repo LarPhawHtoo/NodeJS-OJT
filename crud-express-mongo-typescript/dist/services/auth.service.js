@@ -89,7 +89,8 @@ const checkResetPasswordService = (req, res) => __awaiter(void 0, void 0, void 0
         });
         if (!token)
             return res.status(400).send("Invalid link or expired");
-        user.password = req.body.password;
+        user.password = yield bcrypt_2.default.hash(req.body.password, 12);
+        //user.password = req.body.password;
         yield user.save();
         res.json({
             message: "Forget password sucessfully."
@@ -110,6 +111,7 @@ const resetPasswordService = (req, res) => __awaiter(void 0, void 0, void 0, fun
         });
         if (!passwordReset)
             return res.status(400).send("Invalid link or expired");
+        console.log(req.body.password);
         user.password = yield bcrypt_2.default.hash(req.body.password, 12);
         yield user.save();
         yield passwordReset.delete();

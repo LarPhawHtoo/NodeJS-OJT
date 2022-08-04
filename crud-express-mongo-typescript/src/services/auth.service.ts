@@ -78,8 +78,8 @@ export const checkResetPasswordService = async (req: any, res: Response) => {
       createdAt: { $gte: moment().subtract(1, 'hours').utc() }
     });
     if (!token) return res.status(400).send("Invalid link or expired");
-
-    user.password = req.body.password;
+    user.password = await bcrypt.hash(req.body.password, 12);
+    //user.password = req.body.password;
     await user.save();
 
     res.json({
@@ -99,7 +99,7 @@ export const resetPasswordService = async (req: Request, res: Response) => {
       token: req.params.token
     });
     if (!passwordReset) return res.status(400).send("Invalid link or expired");
-
+    console.log(req.body.password);
     user.password = await bcrypt.hash(req.body.password, 12);
     await user.save();
     await passwordReset.delete();
