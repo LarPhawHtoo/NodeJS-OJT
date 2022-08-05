@@ -1,5 +1,5 @@
 import express from 'express';
-import { getUsers, createUser, findUser, updateUser, deleteUser, findByName } from '../controllers/user.controller';
+import { getUsers, createUser, findUser, updateUser, deleteUser } from '../controllers/user.controller';
 import { body } from 'express-validator';
 import { logout } from '../controllers/auth.controller';
 
@@ -17,9 +17,9 @@ router
     
 router.route("/logout").post([], logout);
 
-router.
-    route("/search")
-    .post(findByName)
+//router.
+//    route("/search")
+//    .post(findByName)
 
 router
     .route("/:id")

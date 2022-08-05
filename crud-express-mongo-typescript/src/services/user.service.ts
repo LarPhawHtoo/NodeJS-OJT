@@ -14,7 +14,7 @@ export const getUserService = async (
 ) => {
   try {
     const page: any = req.query.page || 0;
-    const usersPerPage: any = req.query.upp || 5;
+    const usersPerPage: any = req.query.upp || 17;
 
     const userType = req.headers['userType'];
     const userId = req.headers['userId'];
@@ -75,8 +75,8 @@ export const createUserService = async (
       profile: profile,
       created_user_id: req.body.created_user_id,
     }
-    const post = new User(userTdo);
-    const result = await post.save();
+    const user = new User(userTdo);
+    const result = await user.save();
     res
       .status(201)
       .json({ message: "Created User Successfully!", data: result, status: 1 });

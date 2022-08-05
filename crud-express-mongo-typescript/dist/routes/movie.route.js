@@ -16,9 +16,9 @@ router
     (0, express_validator_1.body)("year").notEmpty().withMessage("Year must not be empty"),
     (0, express_validator_1.body)("rating").notEmpty().withMessage("Rating must note be empty")
 ], movie_controller_1.createMovie);
-router
-    .route("/search")
-    .post(movie_controller_1.findByName);
+//router
+//  .route("/search")
+//  .post(findByName)
 router
     .route("/:id")
     .get(movie_controller_1.findMovie)

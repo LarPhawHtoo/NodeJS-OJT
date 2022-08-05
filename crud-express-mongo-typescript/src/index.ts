@@ -1,20 +1,21 @@
 import express, { Express, Request, Response } from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import  movieRoute  from "./routes/movie.route";
+import  userRoute  from "./routes/user.route";
+import  authRoute from "./routes/auth.route";
+import cors from 'cors';
 import multer, { FileFilterCallback } from "multer";
 import { v4 } from "uuid";
 import passport from "passport";
 require('./config/passport');
 
-//import "dotenv/config"; 
-
-import  movieRoute  from "./routes/movie.route";
-import  userRoute  from "./routes/user.route";
-import  authRoute from "./routes/auth.route";
+import "dotenv/config"; 
 
 import {json} from 'body-parser';
 import path from "path";
 import { rootDir } from "./utils/utils";
+import cookieParser from "cookie-parser";
 
 
 dotenv.config();
@@ -45,8 +46,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(multer({ storage: fileStorage, fileFilter }).single("profile"));
 app.use("/apiuploads", express.static(path.join(rootDir, "apiuploads")));
+app.use(cors());
+app.use(cookieParser());
 app.use(passport.initialize());
-app.use(passport.session());
+//app.use(passport.session());
 
 const port = process.env.PORT;
 

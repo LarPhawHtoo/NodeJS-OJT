@@ -21,7 +21,7 @@ const const_1 = require("../const/const");
 const getUserService = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const page = req.query.page || 0;
-        const usersPerPage = req.query.upp || 5;
+        const usersPerPage = req.query.upp || 17;
         const userType = req.headers['userType'];
         const userId = req.headers['userId'];
         let condition = { deleted_at: null };
@@ -75,8 +75,8 @@ const createUserService = (req, res, next) => __awaiter(void 0, void 0, void 0, 
             profile: profile,
             created_user_id: req.body.created_user_id,
         };
-        const post = new user_model_1.default(userTdo);
-        const result = yield post.save();
+        const user = new user_model_1.default(userTdo);
+        const result = yield user.save();
         res
             .status(201)
             .json({ message: "Created User Successfully!", data: result, status: 1 });

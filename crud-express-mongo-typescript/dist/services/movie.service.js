@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.findByNameService = exports.deleteMovieService = exports.updateMovieService = exports.findMovieService = exports.createMovieService = exports.getMovieService = void 0;
+exports.deleteMovieService = exports.updateMovieService = exports.findMovieService = exports.createMovieService = exports.getMovieService = void 0;
 const movie_model_1 = __importDefault(require("../models/movie.model"));
 const express_validator_1 = require("express-validator");
 /**
@@ -24,7 +24,7 @@ const express_validator_1 = require("express-validator");
 const getMovieService = (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const page = _req.query.page || 0;
-        const postsPerPage = _req.query.ppp || 5;
+        const moviesPerPage = _req.query.upp || 8;
         const userType = _req.headers['userType'];
         const userId = _req.headers['userId'];
         let condition = { deleted_at: null };
@@ -32,8 +32,8 @@ const getMovieService = (_req, res, next) => __awaiter(void 0, void 0, void 0, f
             condition.created_user_id = userId;
             condition.updated_user_id = userId;
         }
-        const posts = yield movie_model_1.default.find(condition).skip(page * postsPerPage).limit(postsPerPage);
-        res.json({ data: posts, status: 1 });
+        const movies = yield movie_model_1.default.find(condition).skip(page * moviesPerPage).limit(moviesPerPage);
+        res.json({ data: movies, status: 1 });
     }
     catch (err) {
         next(err);
@@ -55,8 +55,8 @@ const createMovieService = (req, res, next) => __awaiter(void 0, void 0, void 0,
             error.statusCode = 422;
             throw error;
         }
-        const postList = req.body;
-        const result = yield movie_model_1.default.insertMany(postList);
+        const movieList = req.body;
+        const result = yield movie_model_1.default.insertMany(movieList);
         res
             .status(201)
             .json({ message: "Created Successfully!", data: result, status: 1 });
@@ -68,13 +68,13 @@ const createMovieService = (req, res, next) => __awaiter(void 0, void 0, void 0,
 exports.createMovieService = createMovieService;
 const findMovieService = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const post = yield movie_model_1.default.findById(req.params.id);
-        if (!post) {
+        const movie = yield movie_model_1.default.findById(req.params.id);
+        if (!movie) {
             const error = Error("Not Found!");
             error.statusCode = 404;
             throw error;
         }
-        res.json({ data: post, status: 1 });
+        res.json({ data: movie, status: 1 });
     }
     catch (err) {
         next(err);
@@ -90,18 +90,19 @@ const updateMovieService = (req, res, next) => __awaiter(void 0, void 0, void 0,
             error.statusCode = 422;
             throw error;
         }
-        const post = yield movie_model_1.default.findById(req.params.id);
-        if (!post) {
+        const movie = yield movie_model_1.default.findById(req.params.id);
+        if (!movie) {
             const error = new Error("Not Found!");
             error.statusCode = 404;
             throw error;
         }
-        post.title = req.body.title;
-        post.description = req.body.description;
-        post.status = req.body.status;
-        post.created_user_id = req.body.created_user_id;
-        post.updated_user_id = req.body.updated_user_id;
-        const result = yield post.save();
+        movie.code = req.body.code;
+        movie.name = req.body.name;
+        movie.year = req.body.year;
+        movie.rating = req.body.rating;
+        movie.created_user_id = req.body.created_user_id;
+        movie.updated_user_id = req.body.updated_user_id;
+        const result = yield movie.save();
         res.json({ message: "Updated Successfully!", data: result, status: 1 });
     }
     catch (err) {
@@ -111,14 +112,14 @@ const updateMovieService = (req, res, next) => __awaiter(void 0, void 0, void 0,
 exports.updateMovieService = updateMovieService;
 const deleteMovieService = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const post = yield movie_model_1.default.findById(req.params.id);
-        if (!post) {
+        const movie = yield movie_model_1.default.findById(req.params.id);
+        if (!movie) {
             const error = new Error("Not Found!");
             error.statusCode = 404;
             throw error;
         }
-        post.deleted_at = new Date();
-        yield post.save();
+        movie.deleted_at = new Date();
+        yield movie.save();
         res.sendStatus(204);
     }
     catch (err) {
@@ -126,21 +127,24 @@ const deleteMovieService = (req, res, next) => __awaiter(void 0, void 0, void 0,
     }
 });
 exports.deleteMovieService = deleteMovieService;
-const findByNameService = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const page = req.query.page || 0;
-        const postsPerPage = req.query.ppp || 5;
-        const userType = req.headers['userType'];
-        const userId = req.headers['userId'];
-        let condition = { title: { '$regex': req.body.title, '$options': 'i' }, deleted_at: null };
-        if (userType === "User") {
-            condition.created_user_id = userId;
-        }
-        const posts = yield movie_model_1.default.find(condition).skip(page * postsPerPage).limit(postsPerPage);
-        res.json({ data: posts, status: 1 });
-    }
-    catch (err) {
-        next(err);
-    }
-});
-exports.findByNameService = findByNameService;
+//export const findByNameService = async (
+//  req: any,
+//  res: Response,
+//  next: NextFunction
+//) => {
+//  try {
+//    const page: any = req.query.page || 0;
+//    const postsPerPage: any = req.query.ppp || 5;
+//
+//    const userType = req.headers['userType'];
+//    const userId = req.headers['userId'];
+//    let condition: any = { title: { '$regex': req.body.title, '$options': 'i' }, deleted_at: null };
+//    if (userType === "User") {
+//      condition.created_user_id = userId;
+//    }
+//    const posts = await Post.find(condition).skip(page * postsPerPage).limit(postsPerPage);
+//    res.json({ data: posts, status: 1 });
+//  } catch (err) {
+//    next(err);
+//  }
+//}

@@ -16,9 +16,9 @@ router
     (0, express_validator_1.body)("email").notEmpty().withMessage("Email must note be empty")
 ], user_controller_1.createUser);
 router.route("/logout").post([], auth_controller_1.logout);
-router.
-    route("/search")
-    .post(user_controller_1.findByName);
+//router.
+//    route("/search")
+//    .post(findByName)
 router
     .route("/:id")
     .post(user_controller_1.findUser)

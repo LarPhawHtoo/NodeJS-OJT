@@ -11,16 +11,16 @@ passport.use(new JwtStrategy({
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: 'secrect'
 },
-  function (jwtPayload: any, done: any) {
+  function (jwtPayload: any, cb: any) {
     return User.findOne({ id: jwtPayload.id }, function (err: any, user: any) {
       if (err) {
-        return done(err, false);
+        return cb(err, false);
       }
       if (user) {
-        return done(null, user);
+        return cb(null, user);
       }
       else {
-        return done(null, false);
+        return cb(null, false);
       }
     });
   }));

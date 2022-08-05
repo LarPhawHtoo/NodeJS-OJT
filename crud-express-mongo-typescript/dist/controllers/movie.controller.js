@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.findByName = exports.deleteMovie = exports.updateMovie = exports.findMovie = exports.createMovie = exports.getMovies = void 0;
+exports.deleteMovie = exports.updateMovie = exports.findMovie = exports.createMovie = exports.getMovies = void 0;
 const movie_service_1 = require("../services/movie.service");
 const getMovies = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     (0, movie_service_1.getMovieService)(req, res, next);
@@ -31,7 +31,10 @@ const deleteMovie = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
     (0, movie_service_1.deleteMovieService)(req, res, next);
 });
 exports.deleteMovie = deleteMovie;
-const findByName = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    (0, movie_service_1.findByNameService)(req, res, next);
-});
-exports.findByName = findByName;
+//export const findByName = async (
+//  req: any,
+//  res: Response,
+//  next: NextFunction
+//) => {
+//  findByNameService(req, res, next);
+//}

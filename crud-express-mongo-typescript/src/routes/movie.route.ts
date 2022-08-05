@@ -1,5 +1,5 @@
 import express from 'express';
-import { getMovies, createMovie, findMovie, updateMovie, deleteMovie, findByName } from '../controllers/movie.controller';
+import { getMovies, createMovie, findMovie, updateMovie, deleteMovie} from '../controllers/movie.controller';
 import { body } from 'express-validator';
 
 const router = express.Router();
@@ -16,9 +16,9 @@ router
     ],
     createMovie);
 
-router
-  .route("/search")
-  .post(findByName)
+//router
+//  .route("/search")
+//  .post(findByName)
 
 router
   .route("/:id")
