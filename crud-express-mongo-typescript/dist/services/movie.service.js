@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteMovieService = exports.updateMovieService = exports.findMovieService = exports.createMovieService = exports.getMovieService = void 0;
+exports.findByIdService = exports.deleteMovieService = exports.updateMovieService = exports.findMovieService = exports.createMovieService = exports.getMovieService = void 0;
 const movie_model_1 = __importDefault(require("../models/movie.model"));
 const express_validator_1 = require("express-validator");
 /**
@@ -24,7 +24,7 @@ const express_validator_1 = require("express-validator");
 const getMovieService = (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const page = _req.query.page || 0;
-        const moviesPerPage = _req.query.upp || 8;
+        const moviesPerPage = _req.query.pageSize || 6;
         const userType = _req.headers['userType'];
         const userId = _req.headers['userId'];
         let condition = { deleted_at: null };
@@ -127,24 +127,21 @@ const deleteMovieService = (req, res, next) => __awaiter(void 0, void 0, void 0,
     }
 });
 exports.deleteMovieService = deleteMovieService;
-//export const findByNameService = async (
-//  req: any,
-//  res: Response,
-//  next: NextFunction
-//) => {
-//  try {
-//    const page: any = req.query.page || 0;
-//    const postsPerPage: any = req.query.ppp || 5;
-//
-//    const userType = req.headers['userType'];
-//    const userId = req.headers['userId'];
-//    let condition: any = { title: { '$regex': req.body.title, '$options': 'i' }, deleted_at: null };
-//    if (userType === "User") {
-//      condition.created_user_id = userId;
-//    }
-//    const posts = await Post.find(condition).skip(page * postsPerPage).limit(postsPerPage);
-//    res.json({ data: posts, status: 1 });
-//  } catch (err) {
-//    next(err);
-//  }
-//}
+const findByIdService = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const page = req.query.page || 0;
+        const moviesPerPage = req.query.ppp || 5;
+        const userType = req.headers['userType'];
+        const userId = req.headers['userId'];
+        let condition = { userId: { '$regex': req.params.userId, '$options': 'i' }, deleted_at: null };
+        if (userType === "User") {
+            condition.created_user_id = userId;
+        }
+        const movies = yield movie_model_1.default.find(condition).skip(page * moviesPerPage).limit(moviesPerPage);
+        res.json({ data: movies, status: 1 });
+    }
+    catch (err) {
+        next(err);
+    }
+});
+exports.findByIdService = findByIdService;

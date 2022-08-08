@@ -20,17 +20,17 @@ const movieSchema = new mongoose_1.Schema({
     },
     created_user_id: {
         type: mongoose_1.Schema.Types.ObjectId,
-        ref: "user",
+        ref: "User",
         autopopulate: true
     },
     updated_user_id: {
         type: mongoose_1.Schema.Types.ObjectId,
-        ref: "user",
+        ref: "User",
         autopopulate: true
     },
     deleted_user_id: {
         type: mongoose_1.Schema.Types.ObjectId,
-        ref: "user"
+        ref: "User",
     },
     deleted_at: {
         type: Date

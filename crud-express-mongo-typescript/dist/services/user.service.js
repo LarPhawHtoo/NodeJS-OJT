@@ -21,7 +21,7 @@ const const_1 = require("../const/const");
 const getUserService = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const page = req.query.page || 0;
-        const usersPerPage = req.query.upp || 17;
+        const usersPerPage = req.query.upp || 5;
         const userType = req.headers['userType'];
         const userId = req.headers['userId'];
         let condition = { deleted_at: null };

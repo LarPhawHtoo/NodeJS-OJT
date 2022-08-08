@@ -37,15 +37,15 @@ const userSchema = new mongoose_1.Schema({
     },
     created_user_id: {
         type: mongoose_1.Schema.Types.ObjectId,
-        ref: "user"
+        ref: "User"
     },
     updated_user_id: {
         type: mongoose_1.Schema.Types.ObjectId,
-        ref: "user"
+        ref: "User"
     },
     deleted_user_id: {
         type: mongoose_1.Schema.Types.ObjectId,
-        ref: "user"
+        ref: "User"
     },
     deleted_at: {
         type: Date

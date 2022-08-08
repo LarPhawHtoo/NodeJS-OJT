@@ -19,17 +19,17 @@ const movieSchema = new Schema({
   },
   created_user_id: {
     type: Schema.Types.ObjectId,
-    ref: "user",
+    ref: "User",
     autopopulate: true
   },
   updated_user_id: {
     type: Schema.Types.ObjectId,
-    ref: "user",
+    ref: "User",
     autopopulate: true
   },
   deleted_user_id: {
     type: Schema.Types.ObjectId,
-    ref: "user"
+    ref: "User",
   },
   deleted_at: {
     type: Date

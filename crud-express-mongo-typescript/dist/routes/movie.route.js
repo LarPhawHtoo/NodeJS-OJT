@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const movie_controller_1 = require("../controllers/movie.controller");
 const express_validator_1 = require("express-validator");
+const movie_service_1 = require("../services/movie.service");
 const router = express_1.default.Router();
 router
     .route("/")
@@ -16,9 +17,9 @@ router
     (0, express_validator_1.body)("year").notEmpty().withMessage("Year must not be empty"),
     (0, express_validator_1.body)("rating").notEmpty().withMessage("Rating must note be empty")
 ], movie_controller_1.createMovie);
-//router
-//  .route("/search")
-//  .post(findByName)
+router
+    .route("/search")
+    .post(movie_service_1.findByIdService);
 router
     .route("/:id")
     .get(movie_controller_1.findMovie)

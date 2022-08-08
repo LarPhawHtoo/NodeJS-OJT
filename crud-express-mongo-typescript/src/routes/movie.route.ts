@@ -1,6 +1,7 @@
 import express from 'express';
 import { getMovies, createMovie, findMovie, updateMovie, deleteMovie} from '../controllers/movie.controller';
 import { body } from 'express-validator';
+import { findByIdService } from '../services/movie.service';
 
 const router = express.Router();
 
@@ -16,9 +17,9 @@ router
     ],
     createMovie);
 
-//router
-//  .route("/search")
-//  .post(findByName)
+router
+  .route("/search")
+  .post(findByIdService)
 
 router
   .route("/:id")
